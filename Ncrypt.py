@@ -1,18 +1,23 @@
 #Emmanuel Arabit
 #OCT 11 2022
-import os
+
 from cryptography.fernet import Fernet
 
-key = Fernet.generate_key()
-print(key)
+#import key
+with open('key.json','rb') as f:
+    key = f.read()
+key = Fernet(key)
 
-f = Fernet(key)
-print(f)
+#open file
+file = 'topsecret.jpg'
+with open(file, 'rb') as f:
+    data = f.read()
 
-token = f.encrypt(b"hello world")
+#encrypt file
+token = key.encrypt(data)
 
-print (token)
-
-print (f.decrypt(token))
+#save file
+with open('encrypted.jpg', 'wb') as f:
+    f.write(token)
 
 
