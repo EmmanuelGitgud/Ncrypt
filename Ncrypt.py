@@ -1,6 +1,6 @@
 #Emmanuel Arabit
 #OCT 11 2022
-
+import os 
 from cryptography.fernet import Fernet
 
 #import key
@@ -8,20 +8,38 @@ with open('key.json','rb') as f:
     key = f.read()
 key = Fernet(key)
 
-#open file
-file = 'topsecret.zip'
-w_file = file.split('.')
-w_file = w_file[0]
+#directory
+directory = 'topsecret/'
 
-with open(file, 'rb') as f:
-    data = f.read()
+#iterate through files inside directory
+for filename in os.listdir(directory):
+    filestring = filename
 
-#encrypt file
-token = key.encrypt(data)
+    #file name
+    file_n = filename.split('.')
+    file_n = file_n[0]
 
-# save file
-with open(w_file + '.crypt', 'wb') as f:
-    f.write(token)
+        #file extension
+    file_x = filename.split('.')
+    file_x = file_x[-1]
+
+    if file_x != 'crypt':
+        #open file
+        with open(directory + filename, 'rb') as f:
+            filename = f.read()
+
+        #encrypt each file each loop passes
+        token = key.encrypt(filename)
+
+        #write each encrypted file back
+        with open(os.path.join(directory , file_n +'.'+ file_x +'.crypt'), 'wb') as f:
+            f.write(token)
+
+        os.remove(directory + filestring)
+
+        
+
+
 
 
 
