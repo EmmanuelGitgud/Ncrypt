@@ -15,14 +15,13 @@ directory = 'topsecret/'
 for filename in os.listdir(directory):
     filestring = filename
 
-    #file name
-    file_n = filename.split('.')
-    file_n = file_n[0]
+    #splits file name into 2 parts
+    #(filename,file extension)
+    split_name = filename.split('.')
+    file_n = split_name[0]
+    file_x = split_name[-1]
 
-        #file extension
-    file_x = filename.split('.')
-    file_x = file_x[-1]
-
+    #checks if file is already encrypted before encrypting it
     if file_x != 'crypt':
         #open file
         with open(directory + filename, 'rb') as f:
@@ -35,11 +34,8 @@ for filename in os.listdir(directory):
         with open(os.path.join(directory , file_n +'.'+ file_x +'.crypt'), 'wb') as f:
             f.write(token)
 
+        #remove the duplicate file after encrypting it
         os.remove(directory + filestring)
-
-        
-
-
 
 
 
