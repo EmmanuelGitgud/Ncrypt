@@ -5,8 +5,6 @@ import os
 from tkinter import filedialog 
 from cryptography.fernet import Fernet
 
-
-
 def check_key():
     # import key
     try:
@@ -19,7 +17,7 @@ def check_key():
 
 def encrypt_dir(directory):
     """function that encrypts directory"""
-    if check_key is not False:
+    if check_key() is not False:
         key = check_key()
         # iterate through files inside directory
         for filename in os.listdir(directory):
@@ -51,7 +49,7 @@ def encrypt_dir(directory):
         print('operation complete you may now close the window...')
 
 def decrypt_dir(directory):
-    if check_key is not False:
+    if check_key() is not False:
         key = check_key()
         # iterate through directory
         for filename in os.listdir(directory):
@@ -88,20 +86,19 @@ def select_dir():
     filepath = filedialog.askdirectory()
     return filepath
 
+# print('********** Welcome to Ncrypt **********\n')
 
-print('********** Welcome to Ncrypt **********\n')
+# print('ENCRYPT - 1')
+# print('DECRYPT - 2\n')
 
-print('ENCRYPT - 1')
-print('DECRYPT - 2\n')
+# user_in = input('please select 1 for encryption and 2 for decryption: ')
+# user_dir = input('please enter the file directory: ')
 
-user_in = input('please select 1 for encryption and 2 for decryption: ')
-user_dir = input('please enter the file directory: ')
+# if user_in == '1':
+#     encrypt_dir(user_dir + '\\')
 
-if user_in == '1':
-    encrypt_dir(user_dir + '\\')
+# elif user_in == '2':
+#     decrypt_dir(user_dir + '\\')
 
-elif user_in == '2':
-    decrypt_dir(user_dir + '\\')
-
-else:
-    print('invalid input!')
+# else:
+#     print('invalid input!')
