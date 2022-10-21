@@ -3,5 +3,5 @@ from cryptography.fernet import Fernet
 
 token = Fernet.generate_key()
 
-with open('key.json','wb') as key:
+with open('Ncrypt.key','wb') as key:
     key.write(token)
