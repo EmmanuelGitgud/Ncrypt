@@ -1,10 +1,13 @@
+import os
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog
 from tkinter import *
+from tkinter import messagebox
 from Ncrypt import *
 
 root = Tk()
 root.title('Ncrypt')
+root.iconbitmap('bug.ico')
 root.resizable(False,False)
 
 #functions
@@ -45,13 +48,13 @@ file_loc = tk.Variable()
 file_dir = Entry(root,width=70,textvariable=file_loc)
 key_dir = Entry(root,width=70,textvariable=key_loc)
 
-browse_key_button = Button(root,font=current_font, text='Browse key',command=select_dir())
-browse_file_button = Button(root,font=current_font, text='Browse directory',command=select_dir())
+browse_file_button = Button(root,font=current_font, text='Browse directory',command=select_dir)
+browse_key_button = Button(root,font=current_font, text='Browse key',command=select_key)
 
 main_label = Label(root,font=current_font, text='******************* Welcome To Ncrypt *******************\n\n- Browse for your key\n\n- Browse for the directory\n\n- Then encrypt / decrypt\n')
 
-encrypt_button = Button(root,font=current_font, text='Encrypt Directory',height=2, width=4)
-decrypt_button = Button(root,font=current_font, text='Decrypt Directory',height=2, width=4)
+encrypt_button = Button(root,font=current_font, text='Encrypt Directory',height=2, width=4, command=encrypt_cliked)
+decrypt_button = Button(root,font=current_font, text='Decrypt Directory',height=2, width=4, command=decrypt_clicked)
 
 # grid
 file_dir.grid(column=0, row=0, columnspan=2, sticky=(W), padx=10,pady=10)
